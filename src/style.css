@@ -3,7 +3,7 @@
     margin: 0 auto;
     padding: 20px;
     border: 1px solid #ccc;
-    border-radius: 5px;
+    border-radius: 20px;
     background-color: #f0f8ff; /* Light blue background color */
   }
   
@@ -33,7 +33,7 @@
   .form-container button {
     width: 100%;
     padding: 10px;
-    background-color: #4906a7;
+    background-color: #5b1df7;
     color: #fff;
     border: none;
     border-radius: 20px;
