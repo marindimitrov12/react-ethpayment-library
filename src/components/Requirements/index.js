@@ -1,1 +1,1 @@
-export * from './Requirements';
+export * from './EthPaymentComponent';

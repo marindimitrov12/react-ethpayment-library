@@ -1,10 +1,10 @@
 import React from 'react';
 
-import { Requirements } from '../components/Requirements';
+import { EthPaymentComponent } from '../components/Requirements';
 
 export default {
     title: 'Requirements',
-    component: Requirements,
+    component: EthPaymentComponent,
   };
 
-  export const ExampleStory = () => <Requirements/>;
+  export const ExampleStory = () => <EthPaymentComponent/>;
