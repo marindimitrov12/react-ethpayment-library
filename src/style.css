@@ -4,11 +4,15 @@
     padding: 20px;
     border: 1px solid #ccc;
     border-radius: 5px;
+    background-color: #f0f8ff; /* Light blue background color */
   }
   
   .form-container h2 {
     margin-bottom: 20px;
-    font-size: 1.5rem;
+   
+    font-size: 2.3rem;
+    color:#020103;
+    font-family:Verdana, Geneva, Tahoma, sans-serif;
   }
   
   .form-container label {
@@ -22,17 +26,17 @@
     padding: 8px;
     margin-bottom: 15px;
     border: 1px solid #ccc;
-    border-radius: 3px;
+    border-radius: 20px;
     box-sizing: border-box;
   }
   
   .form-container button {
     width: 100%;
     padding: 10px;
-    background-color: #007bff;
+    background-color: #4906a7;
     color: #fff;
     border: none;
-    border-radius: 3px;
+    border-radius: 20px;
     cursor: pointer;
   }
   
@@ -40,3 +44,13 @@
     background-color: #ccc;
     cursor: not-allowed;
   }
+  .ethereum-logo {
+    width: 40px; /* Adjust the size as needed */
+    margin-right: 10px; /* Adjust the spacing between the logo and the text */
+    padding-left: 120px;
+  }
+  .form-label{
+    font-style:italic;
+    color:#020103;
+  }
+  
