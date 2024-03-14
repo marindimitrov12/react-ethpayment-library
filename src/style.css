@@ -53,4 +53,39 @@
     font-style:italic;
     color:#020103;
   }
+  /* Style the select container */
+.select-container {
+  position: relative;
+  width: 300px; /* Adjust width as needed */
+  
+}
+
+/* Hide the default dropdown arrow */
+.select-container select {
+  appearance: none;
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  background-color: white;
+  border: 1px solid #ccc; /* Border color */
+  padding: 10px; /* Adjust padding as needed */
+  width: 100%;
+  cursor: pointer;
+  border-radius: 20px;
+}
+
+
+
+/* Style the dropdown options */
+.select-container select option {
+  background-color: #ffffff; /* Option background color */
+  color: #05020c; /* Option text color */
+  border-radius: 20px;
+  
+}
+
+/* Hover effect for options */
+.select-container select option:hover {
+  background-color: #5349bd; /* Hover background color */
+}
+
   
