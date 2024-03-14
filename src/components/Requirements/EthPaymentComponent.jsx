@@ -11,7 +11,7 @@ export const EthPaymentComponent=()=>{
   
   const [currentAccount, setCurrentAccount] = useState(null);
   const [allAccounts, setAllAccounts] = useState([]);
-  console.log(currentAccount);
+  
   useEffect(() => {
     const initializeWeb3 = async () => {
       if (window.ethereum) {
