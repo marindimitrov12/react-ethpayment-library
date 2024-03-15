@@ -4,7 +4,7 @@ import React, { useState,useEffect } from 'react';
 import Web3 from 'web3';
 import contractABI from '../../../contractAbi.json';
 
-export const EthPaymentComponent=()=>{
+export const EthPaymentComponent=(props)=>{
     const [amount, setAmount] = useState('');
     const [recipient, setRecipient] = useState('');
   const [loading, setLoading] = useState(false);
@@ -25,8 +25,8 @@ export const EthPaymentComponent=()=>{
           // Initialize web3
           const initializedWeb3 = new Web3(window.ethereum);
           setWeb3(initializedWeb3);
-           console.log(web3);
-           const contract = new initializedWeb3.eth.Contract(contractABI.abi, contractAddress);
+           
+           const contract = new initializedWeb3.eth.Contract(contractABI.abi, props.contractAddress);
             setContract(contract);
           // Get current account 
           const accounts = await initializedWeb3.eth.getAccounts();
@@ -46,11 +46,11 @@ export const EthPaymentComponent=()=>{
 
   async function executeContractFunction() {
    
-    const amountToSend = await web3.utils.toWei('0.1', 'ether'); // Convert 0.1 ETH to wei
+    const amountToSend = await web3.utils.toWei(props.value, 'ether'); // Convert 0.1 ETH to wei
    
     try {
       // Execute contract function
-      const result = await contract.methods.makePayment('0xa0Ee7A142d267C1f36714E4a8F75612F20a79720').send({ from: currentAccount,
+      const result = await contract.methods.makePayment(props.recipient).send({ from: currentAccount,
       value: amountToSend});
   
       console.log('Transaction successful:', result);
