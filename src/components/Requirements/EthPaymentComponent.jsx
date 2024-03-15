@@ -85,7 +85,7 @@ export const EthPaymentComponent=(props)=>{
           <input
             id="amount"
             type="number"
-            value={amount}
+            value={props.value}
             onChange={e => setAmount(e.target.value)}
             className="form-input"
             required
@@ -96,7 +96,7 @@ export const EthPaymentComponent=(props)=>{
           <input
             id="recipient"
             type="text"
-            value={recipient}
+            value={props.recipient}
             onChange={e => setRecipient(e.target.value)}
             className="form-input"
             required
