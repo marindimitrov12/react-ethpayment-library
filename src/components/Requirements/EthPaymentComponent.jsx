@@ -85,7 +85,7 @@ export const EthPaymentComponent=(props)=>{
       
       <form className="payment-form" onSubmit={e => { e.preventDefault();executeContractFunction(); }}>
       <div className="form-group">
-          <label htmlFor="amount" className="form-label">Balance</label>
+          <label htmlFor="amount" className="form-label">Balance:</label>
           <input
             id="amount"
             type="number"
