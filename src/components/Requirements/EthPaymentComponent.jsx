@@ -14,6 +14,7 @@ export const EthPaymentComponent=(props)=>{
   const [allAccounts, setAllAccounts] = useState([]);
   const [web3, setWeb3] = useState(null);
   const [contract, setContract] = useState(null);
+  const [balance, setBalance] = useState('');
   
   useEffect(() => {  
     const initializeWeb3 = async () => {
@@ -58,20 +59,47 @@ export const EthPaymentComponent=(props)=>{
       console.error('Error executing contract function:', error);
     }
   }
+  const getBalance=async()=>{
+     // Get the balance of the account
+     console.log(currentAccount);
+     console.log(web3);
+     web3.eth.getBalance(currentAccount)
+     .then((result) => {
+       // Convert balance from wei to ether
+       const balanceInEth = web3.utils.fromWei(result, 'ether');
+       setBalance(balanceInEth);
+     })
+     .catch((error) => {
+       console.error("Error fetching balance:", error);
+     });
+  }
+  
  return(<> 
   <div className="form-container">
       <h2 className="form-heading">
        
         EthPayment Checkout
       </h2>
+      
       <img src={EthereumLogo} alt="Ethereum Logo" className="ethereum-logo" />
       
       <form className="payment-form" onSubmit={e => { e.preventDefault();executeContractFunction(); }}>
+      <div className="form-group">
+          <label htmlFor="amount" className="form-label">Balance</label>
+          <input
+            id="amount"
+            type="number"
+            value={balance}
+            onChange={e => setAmount(e.target.value)}
+            className="form-input"
+            
+          />
+        </div>
       <div className="select-container">
           <label htmlFor="account" className="form-label">Account :</label>
           <select className="form-input" onChange={(e)=>{
             setCurrentAccount(e.target.value);
-           
+            getBalance();
           }}>
             {allAccounts.map((account,index)=>(
               <option key={index} value={account}>{account}</option>
