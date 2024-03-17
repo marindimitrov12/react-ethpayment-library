@@ -5,12 +5,10 @@ import Web3 from 'web3';
 import contractABI from '../../../contractAbi.json';
 
 export const EthPaymentComponent=(props)=>{
-    const [amount, setAmount] = useState('');
-    const [recipient, setRecipient] = useState('');
+
   const [loading, setLoading] = useState(false);
   const [paymentStatus, setPaymentStatus] = useState('');
-  const contractAddress = '0x5FbDB2315678afecb367f032d93F642f64180aa3';//chage
-  const [currentAccount, setCurrentAccount] = useState(null);
+  const [currentAccount, setCurrentAccount] = useState('');
   const [allAccounts, setAllAccounts] = useState([]);
   const [web3, setWeb3] = useState(null);
   const [contract, setContract] = useState(null);
@@ -44,6 +42,11 @@ export const EthPaymentComponent=(props)=>{
 
       initializeWeb3();
   }, []);
+  useEffect(() => {
+    if (web3 && currentAccount) {
+      getBalance();
+    } // Call getBalance() whenever currentAccount changes
+  }, [currentAccount]);
 
   async function executeContractFunction() {
    
@@ -61,8 +64,7 @@ export const EthPaymentComponent=(props)=>{
   }
   const getBalance=async()=>{
      // Get the balance of the account
-     console.log(currentAccount);
-     console.log(web3);
+    
      web3.eth.getBalance(currentAccount)
      .then((result) => {
        // Convert balance from wei to ether
@@ -99,7 +101,6 @@ export const EthPaymentComponent=(props)=>{
           <label htmlFor="account" className="form-label">Account :</label>
           <select className="form-input" onChange={(e)=>{
             setCurrentAccount(e.target.value);
-            getBalance();
           }}>
             {allAccounts.map((account,index)=>(
               <option key={index} value={account}>{account}</option>
