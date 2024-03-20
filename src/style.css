@@ -108,6 +108,11 @@
   font-size: 18px;
   color: #3c763d; /* Bootstrap success text color */
 }
+.messageFailed {
+  margin-left: 15px;
+  font-size: 18px;
+  color: #490101; /* Bootstrap success text color */
+}
 
 
 

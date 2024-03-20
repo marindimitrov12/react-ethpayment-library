@@ -4,11 +4,13 @@ import React, { useState,useEffect } from 'react';
 import Web3 from 'web3';
 import contractABI from '../../../contractAbi.json';
 import SuccessImg from '../../s4.png';
+import FailedImg from '../../s5.png';
 
 export const EthPaymentComponent=(props)=>{
 
+ 
   const [loading, setLoading] = useState(false);
-  const [paymentStatus, setPaymentStatus] = useState('');
+  const [paymentStatus, setPaymentStatus] = useState(false);
   const [currentAccount, setCurrentAccount] = useState('');
   const [allAccounts, setAllAccounts] = useState([]);
   const [web3, setWeb3] = useState(null);
@@ -58,9 +60,11 @@ export const EthPaymentComponent=(props)=>{
       const result = await contract.methods.makePayment(props.recipient).send({ from: currentAccount,
       value: amountToSend});
       setLoading(true);
+      setPaymentStatus(true);
       console.log('Transaction successful:', result);
     } catch (error) {
       console.error('Error executing contract function:', error);
+      setPaymentStatus(false);
     }
   }
   const getBalance=async()=>{
@@ -79,9 +83,14 @@ export const EthPaymentComponent=(props)=>{
   
  return(<> 
   <div className="form-container">
-  {loading?<div className="success-container">
+  {loading? paymentStatus?<div className="success-container">
     <img src={SuccessImg}  className="checkmark"/>
     <p className="message">Payment Successful!</p>
+    
+  </div>:<div className="success-container">
+    <img src={FailedImg}  className="checkmark"/>
+    <p className="messageFailed">Payment Failed!</p>
+    
   </div>:
       <div>
         <h2 className="form-heading">
