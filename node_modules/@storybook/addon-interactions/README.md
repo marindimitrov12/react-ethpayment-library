@@ -9,7 +9,7 @@ Storybook Addon Interactions enables visual debugging of interactions and tests 
 Install this addon by adding the `@storybook/addon-interactions` dependency:
 
 ```sh
-yarn add -D @storybook/addon-interactions @storybook/jest @storybook/testing-library
+yarn add -D @storybook/addon-interactions @storybook/test
 ```
 
 within `.storybook/main.js`:
@@ -24,19 +24,17 @@ Note that `@storybook/addon-interactions` must be listed **after** `@storybook/a
 
 ## Usage
 
-Interactions relies on "instrumented" versions of Jest and Testing Library, that you import from `@storybook/jest` and
-`@storybook/testing-library` instead of their original package. You can then use these libraries in your `play` function.
+Interactions relies on "instrumented" versions of Vitest and Testing Library, that you import from `@storybook/test` instead of their original package. You can then use these libraries in your `play` function.
 
 ```js
 import { Button } from './Button';
-import { expect } from '@storybook/jest';
-import { within, userEvent } from '@storybook/testing-library';
+import { within, userEvent, expect, fn } from '@storybook/test';
 
 export default {
   title: 'Button',
   component: Button,
-  argTypes: {
-    onClick: { action: true },
+  args: {
+    onClick: fn(),
   },
 };
 
@@ -50,12 +48,10 @@ Demo.play = async ({ args, canvasElement }) => {
 };
 ```
 
-In order to enable step-through debugging, calls to `userEvent.*`, `fireEvent`, `findBy*`, `waitFor*` and `expect` have to
+In order to enable step-through debugging in the addon panel, calls to `userEvent.*`, `fireEvent`, `findBy*`, `waitFor*` and `expect` have to
 be `await`-ed. While debugging, these functions return a Promise that won't resolve until you continue to the next step.
 
 While you can technically use `screen`, it's recommended to use `within(canvasElement)`. Besides giving you a better error
 message when a DOM element can't be found, it will also ensure your play function is compatible with Storybook Docs.
 
-Any `args` that are marked as an `action` (typically via `argTypes` or `argTypesRegex`) will be automatically wrapped in
-a [Jest mock function](https://jestjs.io/docs/jest-object#jestfnimplementation) so you can assert invocations. See
-[addon-actions](https://storybook.js.org/docs/react/essentials/actions) for how to setup actions.
+Note that the `fn` function will assign a spy to your arg, so that you can assert invocations.

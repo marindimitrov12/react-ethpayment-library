@@ -176,38 +176,4 @@ Like [story parameters](https://storybook.js.org/docs/react/writing-stories/para
 
 ### How do controls work with MDX?
 
-MDX compiles to component story format (CSF) under the hood, so there's a direct mapping for every example above using the `args` and `argTypes` props.
-
-Consider this example in CSF:
-
-```js
-import { Button } from './Button';
-export default {
-  title: 'Button',
-  component: Button,
-  argTypes: {
-    background: { control: 'color' },
-  },
-};
-
-const Template = (args) => <Button {...args} />;
-export const Basic = Template.bind({});
-Basic.args = { label: 'hello', background: '#ff0' };
-```
-
-Here's the MDX equivalent:
-
-```jsx
-import { Meta, Story } from '@storybook/addon-docs';
-import { Button } from './Button';
-
-<Meta title="Button" component={Button} argTypes={{ background: { control: 'color' } }} />
-
-export const Template = (args) => <Button {...args} />
-
-<Story name="Basic" args={{ label: 'hello', background: '#ff0' }}>
-  {Template.bind({})}
-</Story>
-```
-
-For more info, see a full [Controls example in MDX for Vue](https://raw.githubusercontent.com/storybookjs/storybook/next/code/examples/vue-kitchen-sink/src/stories/addon-controls.stories.mdx).
+When importing stories from your CSF file into MDX, controls will work the same way. See [the documentation](https://storybook.js.org/docs/writing-docs/mdx#basic-example) for examples.

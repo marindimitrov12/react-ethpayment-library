@@ -1,5 +1,4 @@
 /* eslint-disable no-underscore-dangle */
-/* eslint-disable no-param-reassign */
 
 // This little script converts the overflowscrollbars CSS file into the css-in-js file
 // it's normal you have to run prettier over the file after

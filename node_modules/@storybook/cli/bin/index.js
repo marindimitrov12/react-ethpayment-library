@@ -1,8 +1,8 @@
 #!/usr/bin/env node
 
-const majorNodeVersion = parseInt(process.version.toString().replace('v', '').split('.')[0], 10);
-if (majorNodeVersion < 16) {
-  console.error('To run storybook you need to have node 16 or higher');
+const majorNodeVersion = parseInt(process.versions.node, 10);
+if (majorNodeVersion < 18) {
+  console.error('To run Storybook you need to have Node.js 18 or higher');
   process.exit(1);
 }
 

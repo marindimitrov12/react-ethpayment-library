@@ -69,7 +69,7 @@ export const EthPaymentComponent=(props)=>{
      
     }
   }
-  const getBalance=async()=>{
+  const getBalance=async()=>{ 
      // Get the balance of the account
     
      web3.eth.getBalance(currentAccount)

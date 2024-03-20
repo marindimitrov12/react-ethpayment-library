@@ -1,6 +1,6 @@
 # Storybook Core-server
 
-This package contains common node-side functionality used among the different frameworks (React, RN, Vue, Ember, Angular, etc).
+This package contains common node-side functionality used among the different frameworks (React, RN, Vue 3, Ember, Angular, etc).
 
 It contains:
 

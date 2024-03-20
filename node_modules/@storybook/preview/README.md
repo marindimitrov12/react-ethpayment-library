@@ -10,33 +10,13 @@ The preview's job is:
 
 3. Render the current selection to the web view in either story or docs mode.
 
-## V7 Store vs Legacy (V6)
-
-The story store is designed to load stories 'on demand', and will operate in this fashion if the `storyStoreV7` feature is enabled.
-
-However, for back-compat reasons, in v6 mode, we need to load all stories, synchronously on bootup, emitting the `SET_STORIES` event.
-
-In V7 mode we do not emit that event, instead preferring the `STORY_PREPARED` event, with the data for the single story being rendered.
-
 ## Initialization
-
-The preview is `initialized` in two ways.
-
-### V7 Mode:
 
 - `importFn` - is an async `import()` function
 
 - `getProjectAnnotations` - is a simple function that evaluations `preview.js` and addon config files and combines them. If it errors, the Preview will show the error.
 
 - No `getStoryIndex` function is passed, instead the preview creates a `StoryIndexClient` that pulls `stories.json` from node and watches the event stream for invalidation events.
-
-### V6 Mode
-
-- `importFn` - is a simulated `import()` function, that is synchronous, see `client-api` for details.
-- `getProjectAnnotations` - also evaluates `preview.js` et al, but watches for calls to `setStories`, and passes them to the `ClientApi`
-- `getStoryIndex` is a local function (that must be called _after_ `getProjectAnnotations`) that gets the list of stories added.
-
-See `client-api` for more details on this process.
 
 ## Story Rendering and interruptions
 
