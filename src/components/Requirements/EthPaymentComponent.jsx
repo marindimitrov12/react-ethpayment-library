@@ -81,7 +81,7 @@ export const EthPaymentComponent=(props)=>{
   <div className="form-container">
   {loading?<div className="success-container">
     <img src={SuccessImg}  className="checkmark"/>
-    <p class="message">Payment Successful!</p>
+    <p className="message">Payment Successful!</p>
   </div>:
       <div>
         <h2 className="form-heading">
