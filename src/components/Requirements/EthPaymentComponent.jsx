@@ -64,7 +64,9 @@ export const EthPaymentComponent=(props)=>{
       console.log('Transaction successful:', result);
     } catch (error) {
       console.error('Error executing contract function:', error);
+      setLoading(false);
       setPaymentStatus(false);
+     
     }
   }
   const getBalance=async()=>{
