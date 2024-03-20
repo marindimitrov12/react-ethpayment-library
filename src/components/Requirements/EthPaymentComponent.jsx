@@ -3,6 +3,7 @@ import EthereumLogo from '../../ethereum_logo.png';
 import React, { useState,useEffect } from 'react';
 import Web3 from 'web3';
 import contractABI from '../../../contractAbi.json';
+import SuccessImg from '../../s4.png';
 
 export const EthPaymentComponent=(props)=>{
 
@@ -56,7 +57,7 @@ export const EthPaymentComponent=(props)=>{
       // Execute contract function
       const result = await contract.methods.makePayment(props.recipient).send({ from: currentAccount,
       value: amountToSend});
-  
+      setLoading(true);
       console.log('Transaction successful:', result);
     } catch (error) {
       console.error('Error executing contract function:', error);
@@ -78,68 +79,72 @@ export const EthPaymentComponent=(props)=>{
   
  return(<> 
   <div className="form-container">
-      <h2 className="form-heading">
+  {loading?<div className="success-container">
+    <img src={SuccessImg}  className="checkmark"/>
+    <p class="message">Payment Successful!</p>
+  </div>:
+      <div>
+        <h2 className="form-heading">
        
-        EthPayment Checkout
-      </h2>
-      
-      <img src={EthereumLogo} alt="Ethereum Logo" className="ethereum-logo" />
-      
-      <form className="payment-form" onSubmit={e => { e.preventDefault();executeContractFunction(); }}>
-      <div className="form-group">
-          <label htmlFor="amount" className="form-label">Balance:</label>
-          <input
-            id="amount"
-            type="number"
-            value={balance}
-            onChange={e => setAmount(e.target.value)}
-            className="form-input"
+       EthPayment Checkout
+     </h2>
+     
+     <img src={EthereumLogo} alt="Ethereum Logo" className="ethereum-logo" />
+     
+     <form className="payment-form" onSubmit={e => { e.preventDefault();executeContractFunction(); }}>
+     <div className="form-group">
+         <label htmlFor="amount" className="form-label">Balance:</label>
+         <input
+           id="amount"
+           type="number"
+           value={balance}
+           onChange={e => setAmount(e.target.value)}
+           className="form-input"
+           
+         />
+       </div>
+     <div className="select-container">
+         <label htmlFor="account" className="form-label">Account :</label>
+         <select className="form-input" onChange={(e)=>{
+           setCurrentAccount(e.target.value);
+         }}>
+           {allAccounts.map((account,index)=>(
+             <option key={index} value={account}>{account}</option>
+           ))}
             
-          />
-        </div>
-      <div className="select-container">
-          <label htmlFor="account" className="form-label">Account :</label>
-          <select className="form-input" onChange={(e)=>{
-            setCurrentAccount(e.target.value);
-          }}>
-            {allAccounts.map((account,index)=>(
-              <option key={index} value={account}>{account}</option>
-            ))}
-             
-          </select>
-        
-        </div>
-        <div className="form-group">
-          <label htmlFor="amount" className="form-label">Amount (ETH):</label>
-          <input
-            id="amount"
-            type="number"
-            value={props.value}
-            onChange={e => setAmount(e.target.value)}
-            className="form-input"
-            required
-          />
-        </div>
-        <div className="form-group">
-          <label htmlFor="recipient" className="form-label">Recipient:</label>
-          <input
-            id="recipient"
-            type="text"
-            value={props.recipient}
-            onChange={e => setRecipient(e.target.value)}
-            className="form-input"
-            required
-          />
-        </div>
-        <button type="submit" className="submit-button" disabled={loading}>
-          {loading ? 'Processing...' : 'Pay with Ethereum'}
-        </button>
-      </form>
-      {paymentStatus && (
-        <div className="payment-status">
-          Payment {paymentStatus === 'success' ? 'successful!' : 'failed.'}
-        </div>
-      )}
+         </select>
+       
+       </div>
+       <div className="form-group">
+         <label htmlFor="amount" className="form-label">Amount (ETH):</label>
+         <input
+           id="amount"
+           type="number"
+           value={props.value}
+           onChange={e => setAmount(e.target.value)}
+           className="form-input"
+           required
+         />
+       </div>
+       <div className="form-group">
+         <label htmlFor="recipient" className="form-label">Recipient:</label>
+         <input
+           id="recipient"
+           type="text"
+           value={props.recipient}
+           onChange={e => setRecipient(e.target.value)}
+           className="form-input"
+           required
+         />
+       </div>
+       <button type="submit" className="submit-button" disabled={loading}>
+         {loading ? 'Processing...' : 'Pay with Ethereum'}
+       </button>
+     </form>
+      </div>
+      
+}
+      
     </div>
 </>);
 }
