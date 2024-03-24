@@ -39,11 +39,7 @@ export const PaymentEventComponent=(props)=>{
               setAmount(amounts);
               setRecipient(recipients);
               setTimeStamps(result[2]);
-              // Process the returned data
-              for (let i = 0; i < amounts.length; i++) {
-                const totalPaymentsEther = initializedWeb3.utils.fromWei(amounts[i], 'ether');
-                  console.log(`Recipient: ${recipients[i]}, Amount: ${totalPaymentsEther},Time: ${timestamps[i]}`);
-              }
+             
             })
             .catch(error => {
                 console.error('Error calling getTotalPayments:', error);
@@ -65,9 +61,7 @@ export const PaymentEventComponent=(props)=>{
     initializeWeb3();
 }  ,[]);
 
-console.log(amounts);
-console.log(recipients);
-console.log(timeStamps);
+
     return (
       <div className="table-container">
       {loading? <h1>Loading</h1>:
