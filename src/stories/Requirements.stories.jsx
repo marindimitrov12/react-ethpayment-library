@@ -8,6 +8,6 @@ export default {
   };
 
   export const ExampleStory = () => <EthPaymentComponent 
-  contractAddress="0x5FbDB2315678afecb367f032d93F642f64180aa3"
+  contractAddress="0x1696C7203769A71c97Ca725d42b13270ee493526"
   value="0.1"
-  recipient="0x15d34AAf54267DB7D7c367839AAf71A00a2C6A65"/>;
+  recipient="0x14dC79964da2C08b23698B3D3cc7Ca32193d9955"/>;

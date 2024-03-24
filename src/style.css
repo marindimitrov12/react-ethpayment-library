@@ -113,6 +113,40 @@
   font-size: 18px;
   color: #490101; /* Bootstrap success text color */
 }
+/* CSS for table */
+table {
+  border-collapse: collapse;
+  width: 100%;
+  margin-top: 20px;
+}
+
+/* CSS for table headers */
+th {
+  background-color: #f2f2f2;
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+/* CSS for table data cells */
+td {
+  border: 1px solid #dddddd;
+  text-align: left;
+  padding: 8px;
+}
+
+/* CSS for alternating row colors */
+tr:nth-child(even) {
+  background-color: #f9f9f9;
+}
+.table-container {
+  width: 600px;
+  margin: 0 auto;
+  padding: 20px;
+  border: 1px solid #ccc;
+  border-radius: 20px;
+  background-color: #f0f8ff; /* Light blue background color */
+}
 
 
 

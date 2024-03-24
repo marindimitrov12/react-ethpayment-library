@@ -6,5 +6,5 @@ export default {
     component: PaymentEventComponent,
   };
   export const MyStory = () => <PaymentEventComponent 
-  contractAddress="0x5FbDB2315678afecb367f032d93F642f64180aa3"
-  userAddress="0x3C44CdDdB6a900fa2b585dd299e03d12FA4293BC"/>;
+  contractAddress="0x1696C7203769A71c97Ca725d42b13270ee493526"
+  userAddress="0x14dC79964da2C08b23698B3D3cc7Ca32193d9955"/>;
