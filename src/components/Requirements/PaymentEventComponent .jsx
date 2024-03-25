@@ -1,100 +1,68 @@
-import React,{useState,useEffect} from 'react';
+import React, { useState, useEffect } from 'react';
 import Web3 from 'web3';
 import contractABI from '../../../contractAbi.json';
 import '../../style.css';
-export const PaymentEventComponent=(props)=>{
- 
-    const [recipients, setRecipient] = useState([]);
+import EthereumLogo from '../../ethereum_logo.png';
+
+export const PaymentEventComponent = (props) => {
     const [loading, setLoading] = useState(true);
-    const [contract, setContract] = useState(null);
-    const [web3, setWeb3] = useState(null);
-    const [currentAccount, setCurrentAccount] = useState('');
-    const [amounts,setAmount]=useState([]);
-    const [timeStamps,setTimeStamps]=useState([]);
+    const [transactions, setTransactions] = useState([]);
 
-    useEffect(()=>{
+    useEffect(() => {
         const initializeWeb3 = async () => {
-            if (window.ethereum) {
-              try {
-                // Request account access if needed
-                await window.ethereum.request({ method: 'eth_requestAccounts' });
-      
-                // Initialize web3
-                const initializedWeb3 = new Web3(window.ethereum);
-                setWeb3(initializedWeb3);
-                 
-                 const contract = new initializedWeb3.eth.Contract(contractABI.abi, props.contractAddress);
-                
-                  setContract(contract);
-                  const accounts = await initializedWeb3.eth.getAccounts();
-                  setCurrentAccount(accounts[0]);
-                console.log(accounts[0]);
-                  contract.methods.getTotalPayments(props.userAddress)
-            .call({ from: props.userAddress })
-            .then(result=> {
-             
-              const amounts = result[0]; // Array of amounts
-              const recipients = result[1]; // Array of recipients
-              const timestamps=result[2];
-              setAmount(amounts);
-              setRecipient(recipients);
-              setTimeStamps(result[2]);
-             
-            })
-            .catch(error => {
-                console.error('Error calling getTotalPayments:', error);
-            });
-                  
-                
-                  console.log(currentAccount);
-             
-                setLoading(false);
-               
-              } catch (error) {
-                console.error(error);
-              }
-            }
-            else {
-              console.error("MetaMask extension not detected");
-          }
-    };
-    initializeWeb3();
-}  ,[]);
+            try {
+                if (window.ethereum) {
+                    await window.ethereum.request({ method: 'eth_requestAccounts' });
+                    const initializedWeb3 = new Web3(window.ethereum);
+                    const contract = new initializedWeb3.eth.Contract(contractABI.abi, props.contractAddress);
+                    const accounts = await initializedWeb3.eth.getAccounts();
+                    const result = await contract.methods.getTotalPayments(props.userAddress).call({ from: props.userAddress });
+                    const amounts = result[0];
+                    const recipients = result[1];
+                    const timestamps = result[2];
 
+                    setTransactions(amounts.map((amount, index) => ({
+                        recipient: recipients[index],
+                        amount: initializedWeb3.utils.fromWei(amount, 'ether'),
+                        timestamp: timestamps[index]
+                    })));
+                    setLoading(false);
+                } else {
+                    console.error("MetaMask extension not detected");
+                }
+            } catch (error) {
+                console.error('Error:', error);
+            }
+        };
+
+        initializeWeb3();
+    }, [props.contractAddress, props.userAddress]);
 
     return (
-      <div className="table-container">
-      {loading? <h1>Loading</h1>:
-          <div>
-            <h2 className="form-heading">
-           
-           PaymentInfo:
-         </h2>
-         
-         
-         <table >
-                <thead>
-                    <tr>
-                        <th>Recipient</th>
-                        <th>Amount</th>
-                        <th>Time</th>
-                    </tr>
-                </thead>
-                <tbody>
-                    {amounts.map((amount, index) => (
-                        <tr key={index}>
-                          <td>{recipients[index]}</td>
-                            <td>{web3.utils.fromWei(amount, 'ether')}</td>
-                            <td>{timeStamps[index]}</td>
-                        </tr>
-                    ))}
-                </tbody>
-            </table>
-         
-          </div>
-          
-    }
-          
+        <div className="table-container">
+            {loading ? <h1>Loading...</h1> :
+                <div>
+                    <h2 className="form-heading">Transaction History:</h2>
+                    <table>
+                        <thead>
+                            <tr>
+                                <th>Recipient</th>
+                                <th>Amount</th>
+                                <th>Time</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            {transactions.map((transaction, index) => (
+                                <tr key={index}>
+                                    <td>{transaction.recipient}</td>
+                                    <td>{transaction.amount}</td>
+                                    <td>{transaction.timestamp}</td>
+                                </tr>
+                            ))}
+                        </tbody>
+                    </table>
+                </div>
+            }
         </div>
-      );
-}
+    );
+};
