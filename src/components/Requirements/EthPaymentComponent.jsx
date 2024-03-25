@@ -21,16 +21,12 @@ export const EthPaymentComponent=(props)=>{
     const initializeWeb3 = async () => {
       if (window.ethereum) {
         try {
-          // Request account access if needed
+          
           await window.ethereum.request({ method: 'eth_requestAccounts' });
-
-          // Initialize web3
           const initializedWeb3 = new Web3(window.ethereum);
           setWeb3(initializedWeb3);
-           
-           const contract = new initializedWeb3.eth.Contract(contractABI.abi, props.contractAddress);
-            setContract(contract);
-          // Get current account 
+          const contract = new initializedWeb3.eth.Contract(contractABI.abi, props.contractAddress);
+          setContract(contract);
           const accounts = await initializedWeb3.eth.getAccounts();
           setCurrentAccount(accounts[0]);
           setAllAccounts(accounts);
@@ -48,15 +44,15 @@ export const EthPaymentComponent=(props)=>{
   useEffect(() => {
     if (web3 && currentAccount) {
       getBalance();
-    } // Call getBalance() whenever currentAccount changes
+    } 
   }, [currentAccount]);
 
   async function executeContractFunction() {
    
-    const amountToSend = await web3.utils.toWei(props.value, 'ether'); // Convert 0.1 ETH to wei
+    const amountToSend = await web3.utils.toWei(props.value, 'ether'); 
    
     try {
-      // Execute contract function
+     
       const result = await contract.methods.makePayment(props.recipient).send({ from: currentAccount,
       value: amountToSend});
       setLoading(true);
@@ -69,19 +65,16 @@ export const EthPaymentComponent=(props)=>{
      
     }
   }
-  const getBalance=async()=>{ 
-     // Get the balance of the account
-    
-     web3.eth.getBalance(currentAccount)
-     .then((result) => {
-       // Convert balance from wei to ether
-       const balanceInEth = web3.utils.fromWei(result, 'ether');
-       setBalance(balanceInEth);
-     })
-     .catch((error) => {
-       console.error("Error fetching balance:", error);
-     });
-  }
+  const getBalance = async () => {
+    try {
+      const result = await web3.eth.getBalance(currentAccount);
+      const balanceInEth = web3.utils.fromWei(result, 'ether');
+      setBalance(balanceInEth);
+    } catch (error) {
+      console.error("Error fetching balance:", error);
+    }
+  };
+  
   
  return(<> 
   <div className="form-container">
@@ -109,9 +102,8 @@ export const EthPaymentComponent=(props)=>{
            id="amount"
            type="number"
            value={balance}
-           onChange={e => setAmount(e.target.value)}
            className="form-input"
-           
+           readOnly
          />
        </div>
      <div className="select-container">
@@ -132,9 +124,9 @@ export const EthPaymentComponent=(props)=>{
            id="amount"
            type="number"
            value={props.value}
-           onChange={e => setAmount(e.target.value)}
            className="form-input"
            required
+           readOnly
          />
        </div>
        <div className="form-group">
@@ -143,9 +135,9 @@ export const EthPaymentComponent=(props)=>{
            id="recipient"
            type="text"
            value={props.recipient}
-           onChange={e => setRecipient(e.target.value)}
            className="form-input"
            required
+           readOnly
          />
        </div>
        <button type="submit" className="submit-button" disabled={loading}>
@@ -154,8 +146,7 @@ export const EthPaymentComponent=(props)=>{
      </form>
       </div>
       
-}
-      
+} 
     </div>
 </>);
 }
