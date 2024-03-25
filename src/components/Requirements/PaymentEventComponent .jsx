@@ -42,7 +42,8 @@ export const PaymentEventComponent = (props) => {
         <div className="table-container">
             {loading ? <h1>Loading...</h1> :
                 <div>
-                    <h2 className="form-heading">Transaction History:</h2>
+                    <h1 className="form-payment-history">Transaction History:</h1>
+                    <img src={EthereumLogo} alt="Ethereum Logo" className="ethereum-logo-2" />
                     <table>
                         <thead>
                             <tr>

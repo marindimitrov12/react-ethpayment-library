@@ -15,6 +15,9 @@
     color:#020103;
     font-family:Verdana, Geneva, Tahoma, sans-serif;
   }
+  .form-payment-history{
+    padding-left: 150px;
+  }
   
   .form-container label {
     display: block;
@@ -49,6 +52,11 @@
     width: 40px; /* Adjust the size as needed */
     margin-right: 10px; /* Adjust the spacing between the logo and the text */
     padding-left: 120px;
+  }
+  .ethereum-logo-2 {
+    width: 40px; /* Adjust the size as needed */
+    margin-right: 10px; /* Adjust the spacing between the logo and the text */
+    padding-left: 45%;
   }
   .form-label{
     font-style:italic;
