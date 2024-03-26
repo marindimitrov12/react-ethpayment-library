@@ -37,6 +37,41 @@ export const PaymentEventComponent = (props) => {
 
         initializeWeb3();
     }, [props.contractAddress, props.userAddress]);
+    useEffect(()=>{
+      const initializedWeb3=async()=>{
+        try{
+            if(window.ethereum){
+              await window.ethereum.request({ method: 'eth_requestAccounts' });
+              const initializedWeb3 = new Web3(window.ethereum);
+              const contract = new initializedWeb3.eth.Contract(contractABI.abi, props.contractAddress);
+              
+              console.log(contract.events);
+              try {
+                // Get the latest block number
+                const latestBlock = await initializedWeb3.eth.getBlockNumber();
+        
+                // Fetch past events
+                const events = await contract.getPastEvents('PaymentReceived', {
+                    filter: { _to: props.userAddress},
+                    fromBlock: 0,
+                    toBlock: latestBlock,
+                    
+                });
+        
+                console.log('All past events:', events
+                );
+            } catch (error) {
+                console.error('Error fetching past events:', error);
+            }
+
+            }
+        }
+        catch(error){
+            console.log(error);
+        }
+      }
+      initializedWeb3();
+    },[]);
 
     return (
         <div className="table-container">
