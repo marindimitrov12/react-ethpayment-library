@@ -11,8 +11,7 @@ export const PaymentEventComponent = (props) => {
     useEffect(()=>{
       const initializedWeb3=async()=>{
        const {web3,contract}=await initializeWeb3(window.ethereum,props.contractAddress);
-       console.log(web3);
-       console.log(contract);
+    
        try{
        const latestBlock = await web3.eth.getBlockNumber();
        const events = await contract.getPastEvents('PaymentReceived', {

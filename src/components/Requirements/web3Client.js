@@ -5,9 +5,9 @@ export async function initializeWeb3(ethereumProvider, contractAddress) {
     if (ethereumProvider) {
         try{
             await ethereumProvider.request({ method: 'eth_requestAccounts' });
-      const web3 = new Web3(ethereumProvider);
-      const contract = new web3.eth.Contract(contractABI.abi, contractAddress);
-      return { web3, contract }; 
+            const web3 = new Web3(ethereumProvider);
+            const contract = new web3.eth.Contract(contractABI.abi, contractAddress);
+            return { web3, contract }; 
         }
         catch(error){
           console.error(error);

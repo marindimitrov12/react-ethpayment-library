@@ -1,10 +1,9 @@
 import '../../style.css';
 import EthereumLogo from '../../ethereum_logo.png';
 import React, { useState,useEffect } from 'react';
-import Web3 from 'web3';
-import contractABI from '../../../contractAbi.json';
 import SuccessImg from '../../s4.png';
 import FailedImg from '../../s5.png';
+import { initializeWeb3 } from './web3Client';
 
 export const EthPaymentComponent=(props)=>{
 
@@ -18,28 +17,23 @@ export const EthPaymentComponent=(props)=>{
   const [balance, setBalance] = useState('');
   
   useEffect(() => {  
-    const initializeWeb3 = async () => {
-      if (window.ethereum) {
+    const initializedWeb3 = async () => {
+     
         try {
           
-          await window.ethereum.request({ method: 'eth_requestAccounts' });
-          const initializedWeb3 = new Web3(window.ethereum);
-          setWeb3(initializedWeb3);
-          const contract = new initializedWeb3.eth.Contract(contractABI.abi, props.contractAddress);
+          const {web3,contract}=await initializeWeb3(window.ethereum,props.contractAddress);
+          setWeb3(web3);
           setContract(contract);
-          const accounts = await initializedWeb3.eth.getAccounts();
+          const accounts = await web3.eth.getAccounts();
           setCurrentAccount(accounts[0]);
           setAllAccounts(accounts);
         } catch (error) {
           console.error(error);
         }
-      }
-      else {
-        console.error("MetaMask extension not detected");
-    }
+
     };
 
-      initializeWeb3();
+      initializedWeb3();
   }, []);
   useEffect(() => {
     if (web3 && currentAccount) {
