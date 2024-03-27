@@ -51,7 +51,7 @@ export const PaymentEventComponent = (props) => {
       }
       initializedWeb3();
     },[]);
-     console.log(transactions);
+     
     return (
         <div className="table-container">
             {loading ? <h1>Loading...</h1> :
