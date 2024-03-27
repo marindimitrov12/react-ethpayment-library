@@ -26,7 +26,7 @@ Install the Ethereum Payment React Component Library via npm:
 1. Import the desired components into your React application:
 
 ````javascript
-import { EtherPaymentButton, EtherPaymentHistory } from 'ethereum-payment-react-components';
+import { EtherPaymentComponent, PaymentEventComponent } from 'ethereum-payment-library';
 ````
 2. Use the components within your application's UI:
 
