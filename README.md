@@ -17,7 +17,7 @@ Welcome to the Ethereum Payment React Component Library! This library provides a
 Install the Ethereum Payment React Component Library via npm:
 
 ```bash
-npm install ethereum-payment-react-components
+ npm i react-ethpayment-library
 ```
 ###
 
