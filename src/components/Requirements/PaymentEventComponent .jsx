@@ -1,8 +1,7 @@
 import React, { useState, useEffect } from 'react';
-import Web3 from 'web3';
-import contractABI from '../../../contractAbi.json';
 import '../../style.css';
 import EthereumLogo from '../../ethereum_logo.png';
+import {initializeWeb3}from'./web3Client'
 
 export const PaymentEventComponent = (props) => {
     const [loading, setLoading] = useState(true);
@@ -11,44 +10,30 @@ export const PaymentEventComponent = (props) => {
    
     useEffect(()=>{
       const initializedWeb3=async()=>{
-        try{
-            if(window.ethereum){
-              await window.ethereum.request({ method: 'eth_requestAccounts' });
-              const initializedWeb3 = new Web3(window.ethereum);
-              const contract = new initializedWeb3.eth.Contract(contractABI.abi, props.contractAddress);
-              
-              console.log(contract.events);
-              try {
-               
-                const latestBlock = await initializedWeb3.eth.getBlockNumber();
-        
-                
-                const events = await contract.getPastEvents('PaymentReceived', {
+       const {web3,contract}=await initializeWeb3(window.ethereum,props.contractAddress);
+       console.log(web3);
+       console.log(contract);
+       try{
+       const latestBlock = await web3.eth.getBlockNumber();
+       const events = await contract.getPastEvents('PaymentReceived', {
                     filter: { _to: props.userAddress},
                     fromBlock: 0,
                     toBlock: latestBlock,
                     
                 });
-               
-               
-                setTransactions(events.map((amount, index) => ({
+               setTransactions(events.map((amount, index) => ({
                   recipient: events[index].returnValues[0] ,
-                  amount: initializedWeb3.utils.fromWei(events[index].returnValues[2] , 'ether'),
+                  amount: web3.utils.fromWei(events[index].returnValues[2] , 'ether'),
                   timestamp: events[index].returnValues[3] 
               })));
               setLoading(false);
-
-                
-            } catch (error) {
+            }  
+             catch (error) {
                 console.error('Error fetching past events:', error);
             }
 
             }
-        }
-        catch(error){
-            console.log(error);
-        }
-      }
+      
       initializedWeb3();
     },[]);
      
