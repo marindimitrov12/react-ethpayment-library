@@ -31,8 +31,8 @@ import { EtherPaymentButton, EtherPaymentHistory } from 'ethereum-payment-react-
 2. Use the components within your application's UI:
 
 ````javascript
-<EtherPaymentButton recipientAddress={yourRecipientAddress} amount={paymentAmount} />
-<EtherPaymentHistory />
+<EthPaymentComponent contractAddress={yourContractAddress} recipient={yourRecipientAddress} value={paymentAmount} />
+<EthPaymentComponent />
 
 ````
 # Documentation
