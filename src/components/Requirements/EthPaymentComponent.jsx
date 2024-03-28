@@ -1,4 +1,3 @@
-import '../../style.css';
 import EthereumLogo from '../../ethereum_logo.png';
 import React, { useState,useEffect } from 'react';
 import SuccessImg from '../../s4.png';
@@ -17,6 +16,18 @@ export const EthPaymentComponent=(props)=>{
   const [balance, setBalance] = useState('');
   
   useEffect(() => {  
+    let cssPath = props.userCssPath || './src/style.css'; 
+
+      const loadCss = async () => {
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = cssPath;
+          document.head.appendChild(link);
+
+          return () => {
+              document.head.removeChild(link); 
+          };
+      };
     const initializedWeb3 = async () => {
      
         try {
@@ -32,7 +43,7 @@ export const EthPaymentComponent=(props)=>{
         }
 
     };
-
+    const cleanup = loadCss();
       initializedWeb3();
   }, []);
   useEffect(() => {
@@ -70,7 +81,7 @@ export const EthPaymentComponent=(props)=>{
   };
   
   
- return(<> 
+ return(<> <div className="container-table100">
   <div className="form-container">
   {loading? paymentStatus?<div className="success-container">
     <img src={SuccessImg}  className="checkmark"/>
@@ -142,5 +153,6 @@ export const EthPaymentComponent=(props)=>{
       
 } 
     </div>
+  </div>
 </>);
 }

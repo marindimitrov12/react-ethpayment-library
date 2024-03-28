@@ -46,17 +46,18 @@ export const PaymentEventComponent = (props) => {
             const cleanup = loadCss();
       initializedWeb3();
     
-    },[props.userCssPath, props.contractAddress, props.userAddress]);
+    },[]);
      
     return (
-        <div className="table-container">
+        <div className="container-table100">
+          <div className="table-container">
             {loading ? <h1>Loading...</h1> :
                 <div>
                     <h1 className="form-payment-history">Transaction History:</h1>
                     <img src={EthereumLogo} alt="Ethereum Logo" className="ethereum-logo-2" />
-                    <table>
+                    <table className='table-container'>
                         <thead>
-                            <tr>
+                            <tr className='table100-head'>
                                 <th>Recipient</th>
                                 <th>Amount</th>
                                 <th>Time</th>
@@ -74,6 +75,7 @@ export const PaymentEventComponent = (props) => {
                     </table>
                 </div>
             }
+        </div>
         </div>
     );
 };
