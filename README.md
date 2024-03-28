@@ -8,7 +8,6 @@ Welcome to the Ethereum Payment React Component Library! This library provides a
 - **Customizable**: Easily customize the appearance and behavior of payment components to match your project's design.
 - **Secure Integration**: Utilize secure payment handling mechanisms backed by Solidity smart contracts.
 - **Error Handling**: Comprehensive error handling ensures smooth payment processing and enhances user experience.
-- **Timestamp Conversion**: Convert Unix timestamps to human-readable date and time formats effortlessly.
 
 ## Getting Started
 
