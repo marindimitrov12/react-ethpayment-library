@@ -64,6 +64,9 @@ This component displays the history of Ethereum payments made by the current use
 
 ![image](https://github.com/marindimitrov12/react-ethpayment-library/assets/63950527/59d82fc1-2994-4621-bc33-ca1b43a04349)
 
+![image](https://github.com/marindimitrov12/react-ethpayment-library/assets/63950527/26311dde-bc3b-415b-8344-7549ee702278)
+
+
 
 
 
