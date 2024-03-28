@@ -13,6 +13,8 @@ Welcome to the Ethereum Payment React Component Library! This library provides a
 
 ### Installation
 
+Before using the library you should install metaMask extension in your browser!!!
+
 Install the Ethereum Payment React Component Library via npm:
 
 ```bash
