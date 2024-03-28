@@ -30,7 +30,9 @@ import { EtherPaymentComponent, PaymentEventComponent } from 'ethereum-payment-l
 2. Use the components within your application's UI:
 
 ````javascript
-<EthPaymentComponent contractAddress={yourContractAddress} recipient={yourRecipientAddress} value={paymentAmount} />
+<EthPaymentComponent contractAddress={yourContractAddress} recipient={yourRecipientAddress} value={paymentAmount} theme={dark} />//for dark
+<EthPaymentComponent />
+<EthPaymentComponent contractAddress={yourContractAddress} recipient={yourRecipientAddress} value={paymentAmount} theme={''} />//for light
 <EthPaymentComponent />
 
 ````
@@ -45,6 +47,7 @@ This component enables users to make Ethereum payments to a specified recipient.
   - **recipientAddress**:(string): Ethereum address of the payment recipient.
   - **value**: Amount of Ether to be sent in the payment.
   - **contractAddress**: The address of the contract that we want to use.
+  - **theme**: Dark or Light
 
 PaymentEvent Component:
 This component displays the history of Ethereum payments made by the current user.
@@ -52,6 +55,9 @@ This component displays the history of Ethereum payments made by the current use
 - **Props**:
   - **contractAddress**: The address of the contract that we want to use.
   - **userAddress**: The address of the recipient that we want to use.
+  - **theme**: Dark or Light
+
+# Design
 
 # Contributing
 
