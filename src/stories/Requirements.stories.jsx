@@ -12,4 +12,4 @@ export default {
   value="0.1"
   recipient="0x14dC79964da2C08b23698B3D3cc7Ca32193d9955"
   userCssPath ='./src/style2.css'
-  theme =""/>;
+  theme ="dark"/>;
