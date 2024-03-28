@@ -1,5 +1,4 @@
 import React, { useState, useEffect } from 'react';
-import EthereumLogo from '../../ethereum_logo.png';
 import {initializeWeb3}from'./web3Client'
 
 export const PaymentEventComponent = (props) => {
@@ -50,11 +49,11 @@ export const PaymentEventComponent = (props) => {
      
     return (
         <div className="container-table100">
-          <div className="table-container">
+          
             {loading ? <h1>Loading...</h1> :
                 <div>
                     <h1 className="form-payment-history">Transaction History:</h1>
-                    <img src={EthereumLogo} alt="Ethereum Logo" className="ethereum-logo-2" />
+                   
                     <table className='table-container'>
                         <thead>
                             <tr className='table100-head'>
@@ -76,6 +75,6 @@ export const PaymentEventComponent = (props) => {
                 </div>
             }
         </div>
-        </div>
+        
     );
 };

@@ -17,7 +17,7 @@
   }
   .form-payment-history{
     padding-left: 100px;
-    color: #ffffff;
+    color: #363636;
     font-size: 2.7rem;
   }
   
@@ -250,7 +250,7 @@ table {
   }
   
   tbody tr:nth-child(even) {
-    background-color: #484848
+    background-color: #444444
   }
   
   

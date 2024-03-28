@@ -179,7 +179,7 @@ button:hover {
   margin: 0 auto;
   padding: 20px;
   border-radius: 15px; /* Adjust the border radius value to match the table */
-  background-color: #ecf6ff;
+  background-color: #ddefff;
   overflow: hidden; /* Ensure overflow content does not protrude beyond rounded corners */
 }
 
