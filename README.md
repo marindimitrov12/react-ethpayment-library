@@ -58,6 +58,14 @@ This component displays the history of Ethereum payments made by the current use
   - **theme**: Dark or Light
 
 # Design
+![image](https://github.com/marindimitrov12/react-ethpayment-library/assets/63950527/2e4a4352-b708-459b-971d-17e32b1d7be1)
+
+![image](https://github.com/marindimitrov12/react-ethpayment-library/assets/63950527/d2131bd4-84a2-4314-909c-2dd8b9b874f6)
+
+![image](https://github.com/marindimitrov12/react-ethpayment-library/assets/63950527/59d82fc1-2994-4621-bc33-ca1b43a04349)
+
+
+
 
 # Contributing
 
