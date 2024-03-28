@@ -1,14 +1,25 @@
 import React, { useState, useEffect } from 'react';
-import '../../style.css';
 import EthereumLogo from '../../ethereum_logo.png';
 import {initializeWeb3}from'./web3Client'
 
 export const PaymentEventComponent = (props) => {
     const [loading, setLoading] = useState(true);
     const [transactions, setTransactions] = useState([]);
-
    
+
     useEffect(()=>{
+      let cssPath = props.userCssPath || './src/style.css'; 
+
+      const loadCss = async () => {
+          const link = document.createElement('link');
+          link.rel = 'stylesheet';
+          link.href = cssPath;
+          document.head.appendChild(link);
+
+          return () => {
+              document.head.removeChild(link); 
+          };
+      };
       const initializedWeb3=async()=>{
        const {web3,contract}=await initializeWeb3(window.ethereum,props.contractAddress);
     
@@ -32,9 +43,10 @@ export const PaymentEventComponent = (props) => {
             }
 
             }
-      
+            const cleanup = loadCss();
       initializedWeb3();
-    },[]);
+    
+    },[props.userCssPath, props.contractAddress, props.userAddress]);
      
     return (
         <div className="table-container">
