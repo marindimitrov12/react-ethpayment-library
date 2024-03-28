@@ -5,10 +5,10 @@ import {initializeWeb3}from'./web3Client'
 export const PaymentEventComponent = (props) => {
     const [loading, setLoading] = useState(true);
     const [transactions, setTransactions] = useState([]);
-   
+    let cssPath='';
 
     useEffect(()=>{
-      let cssPath = props.userCssPath || './src/style.css'; 
+      props.theme==="dark"?cssPath='./src/style2.css':cssPath='./src/style.css';
 
       const loadCss = async () => {
           const link = document.createElement('link');

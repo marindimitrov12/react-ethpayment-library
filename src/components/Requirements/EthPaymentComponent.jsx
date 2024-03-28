@@ -14,9 +14,9 @@ export const EthPaymentComponent=(props)=>{
   const [web3, setWeb3] = useState(null);
   const [contract, setContract] = useState(null);
   const [balance, setBalance] = useState('');
-  
+  let cssPath='';
   useEffect(() => {  
-    let cssPath = props.userCssPath || './src/style.css'; 
+    props.theme==="dark"?cssPath='./src/style2.css':cssPath='./src/style.css';
 
       const loadCss = async () => {
           const link = document.createElement('link');
