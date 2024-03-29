@@ -32,10 +32,12 @@ import { EtherPaymentComponent, PaymentEventComponent } from 'ethereum-payment-l
 2. Use the components within your application's UI:
 
 ````javascript
-<EthPaymentComponent contractAddress={yourContractAddress} recipient={yourRecipientAddress} value={paymentAmount} theme={dark} />//for dark
+<EthPaymentComponent contractAddress={yourContractAddress} recipient={yourRecipientAddress} value={paymentAmount}
+ theme={dark} > //for dark
 <EthPaymentComponent />
-<EthPaymentComponent contractAddress={yourContractAddress} recipient={yourRecipientAddress} value={paymentAmount} theme={''} />//for light
-<EthPaymentComponent />
+
+<PaymentEventComponent contractAddress={yourContractAddress} userAddress={yourRecipientAddress} theme={''} > //for light
+<PaymentEventComponent />
 
 ````
 # Documentation
